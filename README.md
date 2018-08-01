@@ -10,6 +10,7 @@ Creating a 2D scatter plot with thumbnail images
     
     Options:
       --scale : size of thumnail (scale value as a real number : default = 1.0)
+			--emphasize : Class to be emphasize (4 digit hexadecimal code)
       -h or --help : display this help message
 
 # Format of input CSV file
