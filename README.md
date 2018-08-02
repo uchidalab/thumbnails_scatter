@@ -76,4 +76,6 @@ Example:
 
 ```python3 ./rank_images.py ./Img_Dist/cae_L2.csv```
 
+![sample image](https://github.com/uchidalab/thumbnails_scatter/blob/master/cae_L2_000.png "サンプル")
+
 *NOTE* The program outputs result images in the directory where the CSV file is.
