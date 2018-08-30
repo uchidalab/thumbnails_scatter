@@ -100,7 +100,7 @@ def scatter_image(feature_x, feature_y, image_paths, title, save=None):
 		disp_size = max ( xlim[1]-xlim[0], ylim[1]-ylim[0] ) / Num
 		bb = Bbox.from_bounds(x, y, disp_size*Scale, disp_size * Scale)
 		bb2 = TransformedBbox(bb, ax.transData)
-		bbox_image = BboxImage(bb2, norm=None, origin=None, clip_on=False)
+		bbox_image = BboxImage(bb2, cmap='gray', norm=None, origin=None, clip_on=False)
 
 		if EmpCode != "" and get_class ( path ) == EmpCode :
 			print ( "{}".format (EmpCode) )
