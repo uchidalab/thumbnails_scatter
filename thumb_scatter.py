@@ -68,12 +68,16 @@ def parse_options () :
 		print ( 'color')
 
 def frame_image(img, frame_width, value, cmap = None):
+
 	b = frame_width # border size in pixel
 	ny, nx = img.shape[0], img.shape[1] # resolution / number of pixels in x and y
-	if img.ndim == 3: # rgb or rgba array
-		framed_img = np.zeros((b+ny+b, b+nx+b, img.shape[2]))
-	elif img.ndim == 2: # grayscale image
-		framed_img = np.zeros((b+ny+b, b+nx+b))
+
+	if img.ndim == 2: # grayscale image
+		retm = np.empty((img.shape[0],img.shape[1],3),img.dtype)
+		retm[:,:,:] = img[:,:,np.newaxis]
+		img = retm
+
+	framed_img = np.zeros((b+ny+b, b+nx+b, img.shape[2]))
 
 	if cmap != None :
 		framed_img[:,:] = np.asarray(cmap.jet(value))[0:3]
@@ -106,20 +110,21 @@ def scatter_image(feature_x, feature_y, image_paths, title, save=None, code_list
 	for (x, y, path) in zip(feature_x, feature_y, image_paths):
 		img = plt.imread(path)
 
-		disp_size = max ( xlim[1]-xlim[0], ylim[1]-ylim[0] ) / Num
-		bb = Bbox.from_bounds(x, y, disp_size*Scale, disp_size * Scale)
-		bb2 = TransformedBbox(bb, ax.transData)
-		bbox_image = BboxImage(bb2, cmap=None, norm=None, origin=None, clip_on=False)
-
 		if EmpCode != "" and get_class ( path ) == EmpCode :
-			img = frame_image ( img, 15, 0 )
+			img = frame_image ( img, 30, 0 )
 			
 		elif code_list != None :
 			idx = code_list.index ( get_class (path) )
 			img = frame_image ( img, 30, float(idx) / len(code_list), cmap=cm )
+
+		disp_size = max ( xlim[1]-xlim[0], ylim[1]-ylim[0] ) / Num
+		bb = Bbox.from_bounds(x, y, disp_size*Scale, disp_size * Scale)
+		bb2 = TransformedBbox(bb, ax.transData)
+		bbox_image = BboxImage(bb2, cmap=None, norm=None, origin=None, clip_on=False)
 			
 		bbox_image.set_data(img)
 		ax.add_artist(bbox_image)
+
 	ax.set_ylim(*ylim)
 	ax.set_xlim(*xlim)
 	plt.title(title)
