@@ -10,7 +10,8 @@ Creating a 2D scatter plot with thumbnail images
     
     Options:
       --scale : size of thumnail (scale value as a real number : default = 1.0)
-			--emphasize : Class to be emphasize (4 digit hexadecimal code)
+      --emphasize : Class to be emphasize (4 digit hexadecimal code)
+      --color : colorize character frames according to their colasses
       -h or --help : display this help message
 
 ## Format of input CSV file
@@ -26,7 +27,7 @@ Please see `sample.csv`.
 
 ## Sample
 
-    python3 ./thumb_scatter.py -scale=1.8 sample.csv 'sample scatter plot' sample.pdf
+    python3 ./thumb_scatter.py --scale=2.5 sample.csv --color 'sample scatter plot' sample.pdf
 
 ![sample image](https://github.com/uchidalab/thumbnails_scatter/blob/master/sample.png "サンプル")
 
